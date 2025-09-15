@@ -1,12 +1,18 @@
 
 from django.urls import path
+from django.views.generic.base import TemplateView
 from student import views
 
 urlpatterns = [
-    path('cl1', views.MyClassView1.as_view(), name='myclassview'),
-    path('cl2', views.MyClassView2.as_view(), name='myclassview2'),
-    path('cl3', views.MyClassView3.as_view(name='Rahul'), name='myclassview3'),
-    path('chcl3', views.MychildClassView3.as_view(), name='mychildClassview3'),
-    path('homecl', views.HomeClassView.as_view() , name='homeclassview'),
-    path('aboutcl', views.HomeClassView.as_view() , name='aboutclassview'),
+    # path('home/', TemplateView.as_view(template_name='student/home.html'), name='home'),
+    # path('index', views.TemplateView.as_view(template_name='student/index.html'), name='viewhome')
+    path('index', views.AboutTemplateView.as_view(), name='viewhome'),
+    # path('contact', views.ContactTemplateView.as_view(), name='contacttemplate'),
+    path('contact', views.ContactTemplateView.as_view(
+      extra_context={'course':'Python'}),
+      name='contacttemplate'),
+    path('profile/<int:id>', views.ProfileTemplateView.as_view(), name='profile'),
+
 ]
+
+
