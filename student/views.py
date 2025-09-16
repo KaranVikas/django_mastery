@@ -16,5 +16,25 @@ from django.views.generic.list import ListView
 
 class StudentListView(ListView):
   model = Student
+  ordering=['roll']
+  context_object_name = 'all_students'
+
+  # add query parameter in Generic View - List View
+  def get_queryset(self):
+    return Student.objects.filter(course='Python')
   
+  def get_context_data(self, *args, **kwargs):
+    context = super().get_context_data(*args, **kwargs)
+    context['django_students'] = Student.objects.filter(course='Django')
+    print("context", context['django_students'])
+    return context
+  
+  # conditional rendering templates 
+  def get_templates_names(self):
+    if self.request.COOKIES.get('user') == 'sonam':
+      template_name = 'student/home.html'
+    else: 
+      template_name = 'student/profile.html'
+    return [template_name]
+
 

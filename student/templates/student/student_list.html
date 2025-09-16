@@ -6,12 +6,20 @@
   <title>Document</title>
 </head>
 <body>
-  {% for stu in student_list %}
+  {% for stu in all_students %}
   <h3>
     {{stu.name}}
     {{stu.roll}}
     {{stu.course}}
   {% endfor %}  
+  </h3>
+  
+  {% for dj_stu in django_students %}
+  <h3>
+    {{dj_stu.name}}
+    {{dj_stu.roll}}
+    {{dj_stu.course}}
+    {% endfor %}
   </h3>
 </body>
 </html>
